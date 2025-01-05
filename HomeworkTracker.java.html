@@ -1,0 +1,241 @@
+<html>
+<head>
+<title>HomeworkTracker.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+HomeworkTracker.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s3">// The HomeworkTask class is designed to represent a single homework task.</span>
+<span class="s0">class </span><span class="s1">HomeworkTask </span><span class="s2">{</span>
+    <span class="s1">String title</span><span class="s2">;           </span><span class="s3">// The title of the task (e.g., &quot;Math Homework&quot;).</span>
+    <span class="s1">String dueDate</span><span class="s2">;         </span><span class="s3">// The due date of the task in the format d/m/y (e.g., &quot;25/12/2024&quot;).</span>
+    <span class="s1">String description</span><span class="s2">;     </span><span class="s3">// A brief description of the task (e.g., &quot;Complete chapter 5 exercises&quot;).</span>
+    <span class="s1">String status</span><span class="s2">;          </span><span class="s3">// The current status of the task (e.g., &quot;Pending&quot;, &quot;Completed&quot;).</span>
+
+    <span class="s3">// The constructor method is used to initialize the task when a new HomeworkTask object is created.</span>
+    <span class="s0">public </span><span class="s1">HomeworkTask</span><span class="s2">(</span><span class="s1">String title</span><span class="s2">, </span><span class="s1">String dueDate</span><span class="s2">, </span><span class="s1">String description</span><span class="s2">) {</span>
+        <span class="s3">// Assign the provided title to the title variable of the task.</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">title </span><span class="s2">= </span><span class="s1">title</span><span class="s2">;</span>
+        <span class="s3">// Assign the provided due date to the dueDate variable of the task.</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">dueDate </span><span class="s2">= </span><span class="s1">dueDate</span><span class="s2">;</span>
+        <span class="s3">// Assign the provided description to the description variable of the task.</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">description </span><span class="s2">= </span><span class="s1">description</span><span class="s2">;</span>
+        <span class="s3">// Set the status of the task to &quot;Pending&quot; by default.</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">status </span><span class="s2">= </span><span class="s4">&quot;Pending&quot;</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method updates the status of a task to a new value (e.g., &quot;Completed&quot;, &quot;In Progress&quot;).</span>
+    <span class="s0">public void </span><span class="s1">updateStatus</span><span class="s2">(</span><span class="s1">String newStatus</span><span class="s2">) {</span>
+        <span class="s3">// Update the status of the task to the new status provided.</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">status </span><span class="s2">= </span><span class="s1">newStatus</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method returns a string representation of the task, making it easier to print out the task details.</span>
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s3">// Return a string that includes the title, due date, and status of the task.</span>
+        <span class="s0">return </span><span class="s4">&quot;Title: &quot; </span><span class="s2">+ </span><span class="s1">title </span><span class="s2">+ </span><span class="s4">&quot;, Due Date: &quot; </span><span class="s2">+ </span><span class="s1">dueDate </span><span class="s2">+ </span><span class="s4">&quot;, Status: &quot; </span><span class="s2">+ </span><span class="s1">status</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s3">// The HomeworkTracker class is the main class that manages the collection of tasks and interaction with the user.</span>
+<span class="s0">public class </span><span class="s1">HomeworkTracker </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s1">Scanner scanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);  </span><span class="s3">// A scanner object to read user input from the console.</span>
+    <span class="s0">static </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">HomeworkTask</span><span class="s2">&gt; </span><span class="s1">tasks </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();  </span><span class="s3">// An ArrayList to store the homework tasks.</span>
+
+    <span class="s3">// The main method is the entry point of the program where execution begins.</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s0">boolean </span><span class="s1">running </span><span class="s2">= </span><span class="s0">true</span><span class="s2">; </span><span class="s3">// A boolean variable to control the loop.</span>
+
+        <span class="s3">// A loop to keep the program running until the user chooses to exit.</span>
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">running</span><span class="s2">) {</span>
+            <span class="s3">// Display the menu to the user so they can choose what they want to do.</span>
+            <span class="s1">printMenu</span><span class="s2">();</span>
+            <span class="s3">// Get the user's choice from the menu.</span>
+            <span class="s0">int </span><span class="s1">choice </span><span class="s2">= </span><span class="s1">getChoice</span><span class="s2">();</span>
+
+            <span class="s3">// A series of if-else statements check which option the user selected.</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">choice </span><span class="s2">== </span><span class="s5">1</span><span class="s2">) {</span>
+                <span class="s3">// If the user chooses option 1, call the addNewTask() method to add a new homework task.</span>
+                <span class="s1">addNewTask</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">choice </span><span class="s2">== </span><span class="s5">2</span><span class="s2">) {</span>
+                <span class="s3">// If the user chooses option 2, call the viewTasks() method to display the existing tasks.</span>
+                <span class="s1">viewTasks</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">choice </span><span class="s2">== </span><span class="s5">3</span><span class="s2">) {</span>
+                <span class="s3">// If the user chooses option 3, call the updateTaskStatus() method to modify the status of an existing task.</span>
+                <span class="s1">updateTaskStatus</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">choice </span><span class="s2">== </span><span class="s5">4</span><span class="s2">) {</span>
+                <span class="s3">// If the user chooses option 4, call the removeTask() method to delete a task.</span>
+                <span class="s1">removeTask</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">choice </span><span class="s2">== </span><span class="s5">5</span><span class="s2">) {</span>
+                <span class="s3">// If the user chooses option 5, display a message that the program is exiting.</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Exiting the program...&quot;</span><span class="s2">);</span>
+                <span class="s1">running </span><span class="s2">= </span><span class="s0">false</span><span class="s2">; </span><span class="s3">// Set running to false to exit the loop.</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s3">// If the user enters an invalid option, display this error message.</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Invalid choice! Please try again.&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method prints the available menu options to the console.</span>
+    <span class="s0">public static void </span><span class="s1">printMenu</span><span class="s2">() {</span>
+        <span class="s3">// Print the menu header.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">--- Homework Tracker ---&quot;</span><span class="s2">);</span>
+        <span class="s3">// Print the first menu option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;1. Add a new task&quot;</span><span class="s2">);</span>
+        <span class="s3">// Print the second menu option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;2. View existing tasks&quot;</span><span class="s2">);</span>
+        <span class="s3">// Print the third menu option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;3. Update task status&quot;</span><span class="s2">);</span>
+        <span class="s3">// Print the fourth menu option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;4. Remove a task&quot;</span><span class="s2">);</span>
+        <span class="s3">// Print the fifth menu option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;5. Exit&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method retrieves the user's choice by reading the input from the console.</span>
+    <span class="s0">public static int </span><span class="s1">getChoice</span><span class="s2">() {</span>
+        <span class="s3">// Prompt the user to choose an option.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Choose an option: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the user's choice as an integer.</span>
+        <span class="s0">int </span><span class="s1">choice </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+        <span class="s3">// Consume the leftover newline character after reading the integer input.</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+        <span class="s3">// Return the user's choice.</span>
+        <span class="s0">return </span><span class="s1">choice</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method adds a new homework task to the list.</span>
+    <span class="s0">public static void </span><span class="s1">addNewTask</span><span class="s2">() {</span>
+        <span class="s3">// Prompt the user to enter the task title.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter task title: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the title as a string input from the user.</span>
+        <span class="s1">String title </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Prompt the user to enter the task due date.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter task due date (d/m/y): &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the due date as a string input from the user.</span>
+        <span class="s1">String dueDate </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Prompt the user to enter a short description of the task.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter task description: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the task description from the user.</span>
+        <span class="s1">String description </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Create a new HomeworkTask object using the provided details.</span>
+        <span class="s1">HomeworkTask task </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HomeworkTask</span><span class="s2">(</span><span class="s1">title</span><span class="s2">, </span><span class="s1">dueDate</span><span class="s2">, </span><span class="s1">description</span><span class="s2">);</span>
+        <span class="s3">// Add the new task to the tasks list.</span>
+        <span class="s1">tasks</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">task</span><span class="s2">);</span>
+        <span class="s3">// Inform the user that the task has been successfully added.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;New task added successfully.&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method displays all the existing tasks in the list.</span>
+    <span class="s0">public static void </span><span class="s1">viewTasks</span><span class="s2">() {</span>
+        <span class="s3">// Check if the tasks list is empty.</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s3">// If no tasks exist, print this message.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;No tasks available.&quot;</span><span class="s2">);</span>
+            <span class="s3">// Exit the method if no tasks are present.</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Print a header for the list of tasks.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">--- List of Tasks ---&quot;</span><span class="s2">);</span>
+        <span class="s3">// Loop through each task in the tasks list.</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s3">// Print each task with its index (i + 1) and formatted details.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">((</span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">) + </span><span class="s4">&quot;. &quot; </span><span class="s2">+ </span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method allows the user to update the status of a specific task (e.g., marking it as &quot;Completed&quot;).</span>
+    <span class="s0">public static void </span><span class="s1">updateTaskStatus</span><span class="s2">() {</span>
+        <span class="s3">// Check if the tasks list is empty.</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s3">// If no tasks exist, print this message.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;No tasks available to update.&quot;</span><span class="s2">);</span>
+            <span class="s3">// Exit the method if no tasks are available to update.</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Display the list of tasks so the user can choose one to update.</span>
+        <span class="s1">viewTasks</span><span class="s2">();</span>
+
+        <span class="s3">// Prompt the user to enter the task number to update.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter the task number to update status: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the user's choice as an integer.</span>
+        <span class="s0">int </span><span class="s1">taskIndex </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">() - </span><span class="s5">1</span><span class="s2">;</span>
+        <span class="s3">// Consume the leftover newline character after reading the integer input.</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Check if the taskIndex is valid.</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">taskIndex </span><span class="s2">&lt; </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">taskIndex </span><span class="s2">&gt;= </span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()) {</span>
+            <span class="s3">// If the taskIndex is invalid, print an error message.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Invalid task number.&quot;</span><span class="s2">);</span>
+            <span class="s3">// Exit the method if the taskIndex is invalid.</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Prompt the user to enter the new status for the task.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter the new status: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the new status as a string input from the user.</span>
+        <span class="s1">String newStatus </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Update the status of the selected task.</span>
+        <span class="s1">tasks</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">taskIndex</span><span class="s2">).</span><span class="s1">updateStatus</span><span class="s2">(</span><span class="s1">newStatus</span><span class="s2">);</span>
+        <span class="s3">// Inform the user that the task status has been successfully updated.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Task status updated successfully.&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// This method allows the user to remove a specific task from the list.</span>
+    <span class="s0">public static void </span><span class="s1">removeTask</span><span class="s2">() {</span>
+        <span class="s3">// Check if the tasks list is empty.</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s3">// If no tasks exist, print this message.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;No tasks available to remove.&quot;</span><span class="s2">);</span>
+            <span class="s3">// Exit the method if no tasks are available to remove.</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Display the list of tasks so the user can choose one to remove.</span>
+        <span class="s1">viewTasks</span><span class="s2">();</span>
+
+        <span class="s3">// Prompt the user to enter the task number to remove.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Enter the task number to remove: &quot;</span><span class="s2">);</span>
+        <span class="s3">// Read the user's choice as an integer.</span>
+        <span class="s0">int </span><span class="s1">taskIndex </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">() - </span><span class="s5">1</span><span class="s2">;</span>
+        <span class="s3">// Consume the leftover newline character after reading the integer input.</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s3">// Check if the taskIndex is valid.</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">taskIndex </span><span class="s2">&lt; </span><span class="s5">0 </span><span class="s2">|| </span><span class="s1">taskIndex </span><span class="s2">&gt;= </span><span class="s1">tasks</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()) {</span>
+            <span class="s3">// If the taskIndex is invalid, print an error message.</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Invalid task number.&quot;</span><span class="s2">);</span>
+            <span class="s3">// Exit the method if the taskIndex is invalid.</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Remove the selected task from the list.</span>
+        <span class="s1">tasks</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">taskIndex</span><span class="s2">);</span>
+        <span class="s3">// Inform the user that the task has been successfully removed.</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Task removed successfully.&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
